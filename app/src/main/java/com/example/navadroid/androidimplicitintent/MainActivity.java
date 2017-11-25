@@ -2,6 +2,7 @@ package com.example.navadroid.androidimplicitintent;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.provider.CalendarContract;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,7 +20,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         initView();
     }
 
-    private void initView(){
+    private void initView() {
         findViewById(R.id.btn_intent_1).setOnClickListener(this);
         findViewById(R.id.btn_intent_2).setOnClickListener(this);
         findViewById(R.id.btn_intent_3).setOnClickListener(this);
@@ -38,18 +39,46 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent);
                 break;
             case R.id.btn_intent_2:
-                // TODO: ???
+                // TODO: CALL ARDIN
+                intent.setAction(Intent.ACTION_CALL);
+                intent.setData(Uri.parse("tel:0869155193"));
+                startActivity(intent);
                 break;
             case R.id.btn_intent_3:
-                // TODO: ???
+                // TODO: Open URL in browser
+                Uri webPage = Uri.parse("https://google.com");
+                intent = new Intent(Intent.ACTION_VIEW, webPage);
+                startActivity(intent);
                 break;
             case R.id.btn_intent_4:
-                // TODO: ???
+                // TODO: Camera
+                intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
+                intent.putExtra(MediaStore.EXTRA_OUTPUT,
+                        Uri.withAppendedPath(Uri.parse("content://media/external/images/media/"), "image.jpg"));
+                startActivity(intent);
                 break;
             case R.id.btn_intent_5:
-                // TODO: ???
+                // TODO:
+
                 break;
 
         }
     }
+//
+//    public void addEvent(String title, String location, long begin, long end){
+//        Intent intent = new Intent(Intent.ACTION_INSERT)
+//                .setData(CalendarContract.Events.CONTENT_URI)
+//                .putExtra(CalendarContract.Events.TITLE,title)
+//                .putExtra(CalendarContract.Events.EVENT_LOCATION, location)
+//                .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, begin)
+//                .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, end);
+//        if (intent.resolveActivity(getPackageManager()) != null) {
+//            startActivity(intent);
+//        }
+//    }
+
+
+
+
+
 }
